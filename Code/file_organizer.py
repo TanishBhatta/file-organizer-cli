@@ -1,5 +1,6 @@
 import shutil
 import os
+import argparse
 
 extension_map = {
 
@@ -84,19 +85,25 @@ def move_file(file, target):
     except Exception as e:
         print(f"There was a error in moving {file}: {e}")
 
-files = os.listdir(".")
-
 def get_target_folder(filename):
 
     extension = filename.split(".")[-1]
 
     return extension_map.get("." + extension, "Unknown Files")
 
+parser = argparse.ArgumentParser(description="Organize files by extension.")
+parser.add_argument("--path", type=str, default=".", help="Path to the folder to organize")
+args = parser.parse_args()
+
+files = os.listdir(args.path)
+
 for file in files:
 
     target = get_target_folder(file)
     print(f"{file} -> {target}")
+    full_path = os.path.join(args.path, file)
+    target_path = os.path.join(args.path, target)
 
     if target != "Unknown Files":
-        create_folder(target)
-        move_file(file, target)
+        create_folder(target_path)
+        move_file(full_path, target_path)
