@@ -92,8 +92,11 @@ def get_target_folder(filename):
     return extension_map.get("." + extension, "Unknown Files")
 
 parser = argparse.ArgumentParser(description="Organize files by extension.")
-parser.add_argument("--path", type=str, default=".", help="Path to the folder to organize")
+parser.add_argument("--path", type=str, help="Path to the folder to organize")
 args = parser.parse_args()
+
+if args.path is None:
+    args.path = input("Enter the folder path to organize: ")
 
 files = os.listdir(args.path)
 
