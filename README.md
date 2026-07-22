@@ -1,4 +1,4 @@
-# file-organizer-cli
+# File-Organizer-Cli
 A terminal-based Python CLI that automatically sorts files into subfolders by extension. Built with os and shutil - no dependencies.
 
 **What it does** -
